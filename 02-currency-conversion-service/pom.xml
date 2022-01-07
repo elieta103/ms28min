@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-			<!-- Spring-boot(2.6.0) Spring-cloud(2021.0.0-RC1 ) Son las versiones usadas.
+		<!-- Spring-boot(2.6.0) Spring-cloud(2021.0.0-RC1 ) Son las versiones usadas.
 	     Desde la 2.4 No es compatible con Ribbon, se debe bajar la version
 	     de spring-boot (2.3.12.RELEASE)  y la de spring cloud (Hoxton.SR12) -->
 	
@@ -13,19 +13,41 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.elhg.microservices</groupId>
-	<artifactId>limits-service</artifactId>
+	<artifactId>current-exchange-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>02-currency-exchange-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
 			<version>1.4.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+			<version>1.4.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 			<!-- SI NO SE AGREGA LA EXCLUSION, LAS RESPONSE SON EN XML,  -->
 			<exclusions>
 				<exclusion>
@@ -33,44 +55,39 @@
 					<artifactId>jackson-dataformat-xml</artifactId>
 				</exclusion>
 			</exclusions>
-			
 		</dependency>
+		
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<!-- HYSTRIX -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- AMQP -->
+		<!-- SLEUTH -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
+
+		<!-- ZIPKIN -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+		
+		<!-- AMQP -->
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+		</dependency>
+
 
 	</dependencies>
 	<dependencyManagement>

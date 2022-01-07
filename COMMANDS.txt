@@ -1,0 +1,5 @@
+Para el uso de zipkin, rabbitMq
+0.- Erlang Instalar, 
+1.- set RABBIT_URI=amqp://localhost
+2.- docker run -d -p 9411:9411 
+3.- Levantar Eureka, api-gateway, currency-conversion, currency-exchange
