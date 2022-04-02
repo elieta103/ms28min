@@ -1,0 +1,6 @@
+Run as -> maven build...
+
+clean spring-boot:build-image -DskipTests
+
+Run image
+docker run -p 8000:8000 in28min/mmv2-naming-server:0.0.1-SNAPSHOT
