@@ -1,0 +1,59 @@
+Run as -> maven build...
+
+clean spring-boot:build-image -DskipTests
+
+Push image
+docker push gresshel/mmv2-05-currency-conversion-service:0.0.11-SNAPSHOT
+docker push gresshel/mmv2-05-currency-conversion-service:0.0.12-SNAPSHOT
+
+
+Run image
+docker run -p 8100:8100 gresshel/mmv2-05-currency-conversion-service:0.0.11-SNAPSHOT
+
+
+Kubernetes
+1.- Crear cluster en Google cloud
+2.- Download GCloud and Kubectl
+3.-  gcloud init
+	Pick configuration to use:
+ 	[1] Re-initialize this configuration [default] with new settings
+	
+	Choose the account you would like to use to perform operations for this configuration:
+ 	[1] gressheliel@gmail.com
+ 	
+ 	Pick cloud project to use:
+ 	[1] custom-range-346019
+
+	Do you want to configure a default Compute Region and Zone? (Y/n)?  n
+
+4.- kubectl version
+	gcloud container clusters get-credentials cluster-gresshel --zone us-central1-c --project custom-range-346019	
+	kubectl version
+	kubectl create deployment currency-conversion --image=gresshel/mmv2-05-currency-conversion-service:0.0.11-SNAPSHOT
+	kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
+	
+	kubectl get services
+	http://34.122.137.122:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+	
+	Borrar todo
+	kubectl delete all -l app=currency-exchange
+	kubectl delete all -l app=currency-conversion
+	kubectl get all
+
+	Desde C:\Workspace\Code\cursosUdemy\microservicios28Minutes\05-currency-conversion-service\backup>
+	01. Version 11
+	02. Version 12 (CURRENCY_EXCHANGE_URI, se pasa como variable de entorno)
+	03. Version 12 (Config Map para variable de entorno)
+	
+	(02 Conversion 03 exchange)
+	(03 Conversion 04 exchange)
+	
+	kubectl apply -f deployment-01-working.yaml
+	kubectl apply -f deployment-02-environment-variable-hardcoded.yaml
+	kubectl apply -f deployment-03-final.yaml
+	
+	kubectl get pods
+	kubectl get all
+	kubectl get services --watch
+	
+	
